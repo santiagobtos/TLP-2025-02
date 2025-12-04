@@ -1,10 +1,15 @@
-# tkinter_snake_tetris_full.py
-# Consola Retro 2000 — Snake & Tetris (completo, mejorado)
-# Hecho por: Santiago, Manuel y Juan
-# Ejecutar: python tkinter_snake_tetris_full.py
+# -*- coding: utf-8 -*-
+from __future__ import unicode_literals
 
-import tkinter as tk
-from tkinter import ttk, messagebox, font
+# tkinter_snake_tetris_full_py2.py
+# Consola Retro 2000 — Snake & Tetris (convertido a Python 2.7)
+
+# Ejecutar: python2 tkinter_snake_tetris_full_py2.py
+
+import Tkinter as tk
+import ttk
+import tkFont as font
+import tkMessageBox as messagebox
 import time
 import random
 
@@ -233,13 +238,9 @@ class JuegoTetris:
             {'name':'O','rots':[[[1,1],[1,1]]]},
             {'name':'T','rots':[[[0,1,0],[1,1,1]],[[1,0],[1,1],[1,0]],[[1,1,1],[0,1,0]],[[0,1],[1,1],[0,1]]]},
             {'name':'L','rots':[[[1,0],[1,0],[1,1]],[[0,0,1],[1,1,1]],[[1,1],[0,1],[0,1]],[[1,1,1],[1,0,0]]]},
-
             {'name':'J','rots':[[[0,1],[0,1],[1,1]],[[1,1,1],[0,0,1]],[[1,1],[1,0],[1,0]],[[1,0,0],[1,1,1]]]},
-
             {'name':'S','rots':[[[0,1,1],[1,1,0]],[[1,0],[1,1],[0,1]]]},
-
             {'name':'Z','rots':[[[1,1,0],[0,1,1]],[[0,1],[1,1],[1,0]]]},
-
         ]
 
     def _spawn(self):
@@ -330,8 +331,8 @@ class JuegoTetris:
 # -------------------- GUI --------------------
 class RetroApp(tk.Tk):
     def __init__(self):
-        super().__init__()
-        self.title("Consola Retro 2000 — 2 juegos y 1998 en desarrollo — Disponibles: Snake & Tetris")
+        tk.Tk.__init__(self)
+        self.title(u"Consola Retro 2000 — 2 juegos y 1998 en desarrollo — Disponibles: Snake & Tetris")
         self.configure(bg="#0f0f10")
         self.minsize(900, 600)
 
@@ -371,30 +372,30 @@ class RetroApp(tk.Tk):
         self.protocol("WM_DELETE_WINDOW", self.quit)
 
     def _build_left(self):
-        tk.Label(self.left_panel, text="Consola Retro 2000", font=self.f_title, fg="#7CFFB2", bg="#171717").pack(pady=(12, 6))
-        tk.Label(self.left_panel, text="(sí, 2 juegos y 1998 en desarrollo)", font=self.f_m, fg="#CFEFE3", bg="#171717").pack(pady=(0, 8))
+        tk.Label(self.left_panel, text=u"Consola Retro 2000", font=self.f_title, fg="#7CFFB2", bg="#171717").pack(pady=(12, 6))
+        tk.Label(self.left_panel, text=u"(sí, 2 juegos y 1998 en desarrollo)", font=self.f_m, fg="#CFEFE3", bg="#171717").pack(pady=(0, 8))
 
         # <-- CAMBIO: reemplazamos el combobox por DOS BOTONES: Snake y Tetris -->
         btn_frame_top = tk.Frame(self.left_panel, bg="#171717")
         btn_frame_top.pack(padx=12, pady=(0,8), fill='x')
         # Botón Snake
-        ttk.Button(btn_frame_top, text="Snake", command=self._start_snake).pack(side='left', expand=True, fill='x', padx=4)
+        ttk.Button(btn_frame_top, text=u"Snake", command=self._start_snake).pack(side='left', expand=True, fill='x', padx=4)
         # Botón Tetris
-        ttk.Button(btn_frame_top, text="Tetris", command=self._start_tetris).pack(side='left', expand=True, fill='x', padx=4)
+        ttk.Button(btn_frame_top, text=u"Tetris", command=self._start_tetris).pack(side='left', expand=True, fill='x', padx=4)
         # <-- FIN CAMBIO -->
 
         btn_frame = tk.Frame(self.left_panel, bg="#171717")
         btn_frame.pack(pady=8, fill='x', padx=10)
-        ttk.Button(btn_frame, text="Reiniciar", command=self._restart).pack(side='left', expand=True, fill='x', padx=4)
+        ttk.Button(btn_frame, text=u"Reiniciar", command=self._restart).pack(side='left', expand=True, fill='x', padx=4)
 
-        ttk.Button(self.left_panel, text="Controles / Reglas", command=self._show_info).pack(fill='x', padx=12, pady=6)
-        ttk.Button(self.left_panel, text="Efecto CRT", command=self._toggle_crt).pack(fill='x', padx=12, pady=6)
+        ttk.Button(self.left_panel, text=u"Controles / Reglas", command=self._show_info).pack(fill='x', padx=12, pady=6)
+        ttk.Button(self.left_panel, text=u"Efecto CRT", command=self._toggle_crt).pack(fill='x', padx=12, pady=6)
 
         # legend / explanations persistent
-        lbl = tk.Label(self.left_panel, text="Leyenda (Snake):\n* rojo = comida normal (+10)\n* dorada = +50\n* negra = -50 y encoge\n* morada = acelera 5s\n* cyan = ralentiza 5s\n* gris = obstáculo (muerte)", justify='left', bg="#171717", fg="#E6F9EA", font=self.f_small, wraplength=220)
+        lbl = tk.Label(self.left_panel, text=u"Leyenda (Snake):\n* rojo = comida normal (+10)\n* dorada = +50\n* negra = -50 y encoge\n* morada = acelera 5s\n* cyan = ralentiza 5s\n* gris = obstáculo (muerte)", justify='left', bg="#171717", fg="#E6F9EA", font=self.f_small, wraplength=220)
         lbl.pack(padx=10, pady=10, fill='x')
 
-        self.status_var = tk.StringVar(value="Listo — elige Snake o Tetris arriba")
+        self.status_var = tk.StringVar(value=u"Listo — elige Snake o Tetris arriba")
         tk.Label(self.left_panel, textvariable=self.status_var, bg="#171717", fg="#CFEFE3", font=self.f_small, wraplength=220, justify='left').pack(pady=(8,6), padx=8)
 
     def _build_main(self):
@@ -402,9 +403,9 @@ class RetroApp(tk.Tk):
         header = tk.Frame(self.main_panel, bg="#111111")
         header.grid(row=0, column=0, sticky='ew')
         header.grid_columnconfigure(1, weight=1)
-        self.lbl_game_title = tk.Label(header, text="Ningún juego activo", font=self.f_m, fg="#FFD27A", bg="#111111")
+        self.lbl_game_title = tk.Label(header, text=u"Ningún juego activo", font=self.f_m, fg="#FFD27A", bg="#111111")
         self.lbl_game_title.grid(row=0, column=0, sticky='w', padx=8, pady=8)
-        self.score_var = tk.StringVar(value="Puntos: 0")
+        self.score_var = tk.StringVar(value=u"Puntos: 0")
         tk.Label(header, textvariable=self.score_var, font=self.f_small, fg="#CFEFE3", bg="#111111").grid(row=0, column=1, sticky='e', padx=8)
 
         # canvas area
@@ -419,7 +420,7 @@ class RetroApp(tk.Tk):
         # bottom legend / controls
         legend = tk.Frame(self.main_panel, bg="#0b0b0b")
         legend.grid(row=2, column=0, sticky='ew')
-        tk.Label(legend, text="W/A/S/D or ↑/←/↓/→ — Mover | P — Pausa | R — Reiniciar | Esc — Volver al menú", font=self.f_small, fg="#BBBBBB", bg="#0b0b0b").pack(pady=6)
+        tk.Label(legend, text=u"W/A/S/D or ↑/←/↓/→ — Mover | P — Pausa | R — Reiniciar | Esc — Volver al menú", font=self.f_small, fg="#BBBBBB", bg="#0b0b0b").pack(pady=6)
 
         # resize
         self.canvas.bind('<Configure>', self._on_canvas_resize)
@@ -429,37 +430,37 @@ class RetroApp(tk.Tk):
         # Usamos un número de obstáculos fijo por defecto (minimización de cambios).
         obst_num = clamp(8, 6, 18)
         self.active_game = JuegoSnake(cols=28, rows=20, velocidad=6.0, obstaculos_cantidad=obst_num)
-        self.lbl_game_title.config(text=f"Snake")
-        self.status_var.set('Snake iniciado — usa W/A/S/D o flechas')
+        self.lbl_game_title.config(text=u"Snake")
+        self.status_var.set(u'Snake iniciado — usa W/A/S/D o flechas')
 
     def _start_tetris(self):
         self.game_type = 'tetris'
         self.active_game = JuegoTetris(cols=10, rows=20, fall_speed=1.0)
-        self.lbl_game_title.config(text=f"Tetris")
-        self.status_var.set('Tetris iniciado — usa W/A/S/D o flechas')
+        self.lbl_game_title.config(text=u"Tetris")
+        self.status_var.set(u'Tetris iniciado — usa W/A/S/D o flechas')
 
     def _restart(self):
         if not self.active_game:
             return
         self.active_game.reiniciar()
-        self.status_var.set('Juego reiniciado')
+        self.status_var.set(u'Juego reiniciado')
 
     def _on_key(self, ev):
         # map keys safely
-        key = ev.keysym
+        key = getattr(ev, 'keysym', None)
         mapped = None
         if key in KEYMAP:
             mapped = KEYMAP[key]
         else:
-            ch = (ev.char or '').lower()
+            ch = (getattr(ev, 'char', '') or '').lower()
             mapped = KEYMAP.get(ch, None)
         if mapped == 'esc':
-            if messagebox.askyesno('Volver', '¿Deseas volver al menú principal?'):
+            if messagebox.askyesno(u'Volver', u'¿Deseas volver al menú principal?'):
                 self.active_game = None
                 self.game_type = None
-                self.lbl_game_title.config(text='Ningún juego activo')
-                self.score_var.set('Puntos: 0')
-                self.status_var.set('Listo — elige Snake o Tetris arriba')
+                self.lbl_game_title.config(text=u'Ningún juego activo')
+                self.score_var.set(u'Puntos: 0')
+                self.status_var.set(u'Listo — elige Snake o Tetris arriba')
             return
         if mapped == 'r' and self.active_game:
             self.active_game.reiniciar()
@@ -481,28 +482,31 @@ class RetroApp(tk.Tk):
 
     def _toggle_crt(self):
         self.crt_enabled = not self.crt_enabled
-        self.status_var.set('CRT ' + ('ON' if self.crt_enabled else 'OFF'))
+        if self.crt_enabled:
+            self.status_var.set(u'CRT ON')
+        else:
+            self.status_var.set(u'CRT OFF')
 
     def _show_info(self):
         msg = (
-            "📘 CONTROLES:\n"
-            "  W/A/S/D o flechas — Mover\n"
-            "  P — Pausa / Reanudar\n"
-            "  R — Reiniciar juego\n"
-            "  Esc — Volver al menú principal\n\n"
-            "📗 REGLAS (resumen):\n"
-            "  Snake — Come comida roja para crecer. Evita chocar contra paredes, tu cuerpo u obstáculos.\n"
-            "  Tetris — Encaja las piezas para formar líneas completas y eliminarlas. No dejes que las piezas lleguen arriba.\n\n"
-            "📙 SIGNIFICADO DE ELEMENTOS (Snake):\n"
-            "  • rojo (normal) — +10 puntos\n"
-            "  • dorada — +50 puntos\n"
-            "  • negra — -50 puntos y encoge 1 segmento\n"
-            "  • morada — Acelera el juego 5 segundos (útil/arriesgado)\n"
-            "  • cyan — Ralentiza el juego 5 segundos (temporario)\n"
-            "  • gris — Obstáculo: bloqueo sólido (chocar = muerte)\n\n"
-            "🎮 Consola Retro 2000 — (sí, '2000 variantes' es sarcasmo) — Hecho por Santiago, Manuel y Juan"
+            u"📘 CONTROLES:\n"
+            u"  W/A/S/D o flechas — Mover\n"
+            u"  P — Pausa / Reanudar\n"
+            u"  R — Reiniciar juego\n"
+            u"  Esc — Volver al menú principal\n\n"
+            u"📗 REGLAS (resumen):\n"
+            u"  Snake — Come comida roja para crecer. Evita chocar contra paredes, tu cuerpo u obstáculos.\n"
+            u"  Tetris — Encaja las piezas para formar líneas completas y eliminarlas. No dejes que las piezas lleguen arriba.\n\n"
+            u"📙 SIGNIFICADO DE ELEMENTOS (Snake):\n"
+            u"  • rojo (normal) — +10 puntos\n"
+            u"  • dorada — +50 puntos\n"
+            u"  • negra — -50 puntos y encoge 1 segmento\n"
+            u"  • morada — Acelera el juego 5 segundos (útil/arriesgado)\n"
+            u"  • cyan — Ralentiza el juego 5 segundos (temporario)\n"
+            u"  • gris — Obstáculo: bloqueo sólido (chocar = muerte)\n\n"
+            u"🎮 Consola Retro 2000 — (sí, '2000 variantes' es sarcasmo) — Hecho por Santiago, Manuel y Juan"
         )
-        messagebox.showinfo('Controles y Reglas', msg)
+        messagebox.showinfo(u'Controles y Reglas', msg)
 
     def _loop(self):
         now = time.time()
@@ -514,12 +518,12 @@ class RetroApp(tk.Tk):
                 self.active_game.paso(dt)
             except Exception as e:
                 # evitar que un error rompa el loop; mostrar info mínima
-                print("Error en paso:", e)
+                print "Error en paso:", e
             self._render()
-            self.score_var.set(f'Puntos: {getattr(self.active_game, "puntaje", 0)}')
+            self.score_var.set(u'Puntos: {}'.format(getattr(self.active_game, "puntaje", 0)))
             # mostrar mensajes
             if hasattr(self.active_game, 'muerto') and self.active_game.muerto:
-                self.canvas.create_text(self.canvas_width//2, self.canvas_height//2, text='GAME OVER', font=("Courier", 32, 'bold'), fill='#FF6666')
+                self.canvas.create_text(self.canvas_width//2, self.canvas_height//2, text=u'GAME OVER', font=("Courier", 32, 'bold'), fill='#FF6666')
         else:
             self._render_welcome()
 
@@ -528,14 +532,17 @@ class RetroApp(tk.Tk):
     def _render_welcome(self):
         self.canvas.delete('all')
         txt = (
-            "CONSOL A RETRO 2000\n"
-            "Snake & Tetris — Hecho por Santiago, Manuel y Juan\n\n"
-            "Elige Snake o Tetris arriba."
+            u"CONSOL A RETRO 2000\n"
+            u"Snake & Tetris — Hecho por Santiago, Manuel y Juan\n\n"
+            u"Elige Snake o Tetris arriba."
         )
         self.canvas.create_text(self.canvas_width//2, self.canvas_height//3, text=txt, font=("Courier", 22, 'bold'), fill='#88FFCC', justify='center')
         # subtle pattern
-        for i in range(0, max(200, self.canvas_width), 40):
+        i = 0
+        max_range = max(200, self.canvas_width)
+        while i < max_range:
             self.canvas.create_line(i, int(self.canvas_height*2/3), i+20, int(self.canvas_height*2/3) + 8, fill='#0f0f12')
+            i += 40
 
     def _render(self):
         self.canvas.delete('all')
@@ -560,7 +567,7 @@ class RetroApp(tk.Tk):
         y2 = oy + (y + 1) * cell - pad
         self.canvas.create_rectangle(x1, y1, x2, y2, fill=fill, outline='#06120f')
 
-    def _render_snake(self, game: JuegoSnake):
+    def _render_snake(self, game):
         cols, rows = game.cols, game.rows
         cell = self._compute_cell(cols, rows)
         total_w, total_h = cols * cell, rows * cell
@@ -573,10 +580,12 @@ class RetroApp(tk.Tk):
         # grid faint
         for i in range(cols + 1):
             x = ox + i * cell
-            self.canvas.create_line(x, oy, x, oy + total_h, fill='#082014' if i % 5 else '#123d2b')
+            color_line = '#082014' if (i % 5) else '#123d2b'
+            self.canvas.create_line(x, oy, x, oy + total_h, fill=color_line)
         for j in range(rows + 1):
             y = oy + j * cell
-            self.canvas.create_line(ox, y, ox + total_w, y, fill='#082014' if j % 5 else '#123d2b')
+            color_line = '#082014' if (j % 5) else '#123d2b'
+            self.canvas.create_line(ox, y, ox + total_w, y, fill=color_line)
 
         # obstacles
         for (x, y) in game.obstaculos:
@@ -611,10 +620,10 @@ class RetroApp(tk.Tk):
         hud_x = ox + 20
         hud_y = oy + total_h + 30
         self.canvas.create_text(hud_x, hud_y, anchor='nw',
-                                text=f"Puntos: {game.puntaje}    Tiempo: {int(game.tiempo)}s",
+                                text=u"Puntos: {0}    Tiempo: {1}s".format(game.puntaje, int(game.tiempo)),
                                 font=("Courier", max(10, cell//2)), fill='#DDEFE3')
 
-    def _render_tetris(self, game: JuegoTetris):
+    def _render_tetris(self, game):
         cols, rows = game.cols, game.rows
         cell = self._compute_cell(cols, rows)
         total_w, total_h = cols * cell, rows * cell
@@ -645,20 +654,22 @@ class RetroApp(tk.Tk):
         hud_x = ox
         hud_y = oy + total_h + 8
         self.canvas.create_text(hud_x, hud_y, anchor='nw',
-                                text=f"Puntos: {game.puntaje}    Nivel: {game.nivel}",
+                                text=u"Puntos: {0}    Nivel: {1}".format(game.puntaje, game.nivel),
                                 font=("Courier", max(10, cell//2)), fill='#DDEFE3')
 
     def _render_crt(self):
         # scanlines
-        for y in range(0, self.canvas_height, 2):
+        y = 0
+        while y < self.canvas_height:
             self.canvas.create_line(0, y, self.canvas_width, y, fill='black', width=1)
+            y += 2
         # top/bottom vignette
         self.canvas.create_rectangle(0, 0, self.canvas_width, 24, fill='#000000', stipple='gray25', outline='')
         self.canvas.create_rectangle(0, self.canvas_height-24, self.canvas_width, self.canvas_height, fill='#000000', stipple='gray25', outline='')
 
     def quit(self):
-        if messagebox.askokcancel('Salir', '¿Deseas cerrar la Consola Retro 2000?'):
-            super().quit()
+        if messagebox.askokcancel(u'Salir', u'¿Deseas cerrar la Consola Retro 2000?'):
+            tk.Tk.quit(self)
 
 # -------------------- Ejecutar --------------------
 if __name__ == '__main__':
